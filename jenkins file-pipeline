@@ -4,7 +4,7 @@ pipeline {
     stages{
         stage ('Code Download From GIT'){
             steps{
-                sh "git clone https://github.com/suresh-ceq/jenkins-server.git"
+                git 'https://github.com/suresh-ceq/jenkins-server.git'
             }
         }
          
