@@ -1,26 +1,25 @@
 pipeline { 
-    agent{ label "MAIN" }
+    agent{ label "MASTER" }
     triggers{ pollSCM('* * * * *') }
     stages{
-        stage ('Code Download From SCM'){
+        stage ('Code Download From GIT'){
             steps{
-                git ''https://github.com/suresh-ceq/jenkins-server.git
+                sh ""
             }
         }
+         
         stage('Deploy_Server_setup'){
             steps{
-                sh "ansible -m ping -i $WORKSPACE/inventory all"
-                sh "ansible-playbook -i $WORKSPACE/inventory $WORKSPACE/myplaybook.yml --syntax-check"
-                sh "ansible-playbook -i $WORKSPACE/inventory $WORKSPACE/myplaybook.yml"
+                sh "ansible -m ping -i $WORKSPACE/spring-hello-world/inventory all"
+                sh "ansible-playbook -i $WORKSPACE/spring-hello-world/inventory $WORKSPACE/myplaybook.yml --syntax-check"
+                sh "ansible-playbook -i $WORKSPACE/spring-hello-world/inventory $WORKSPACE/myplaybook.yml"
             }            
         }
-        stage('Deploy'){
-            agent{ label "maven_server"}
+        stage('Build & Deploy APP in Docker'){
+            agent{ label "deploy_server"}
             steps{
-                sh "cd /home/jenkins/cloudeq-spring/" 
-                sh "mvn clean package"  
-                sh "cp $WORKSPACE/target/*.jar /home/jenkins/"
-                sh "nohup java -jar /home/jenkins/spring-rest-hello-world-1.0.2.jar &"
+                sh "sudo docker image build -t ceq_spring:1.0 ."
+                sh "sudo docker container run -d -p 8081:8081 ceq_spring:1.0 "
                            
             }
         } 
