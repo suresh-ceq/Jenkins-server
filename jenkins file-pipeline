@@ -10,9 +10,9 @@ pipeline {
          
         stage('Deploy_Server_setup'){
             steps{
-                sh "ansible -m ping -i $WORKSPACE/spring-hello-world/inventory all"
-                sh "ansible-playbook -i $WORKSPACE/spring-hello-world/inventory $WORKSPACE/myplaybook.yml --syntax-check"
-                sh "ansible-playbook -i $WORKSPACE/spring-hello-world/inventory $WORKSPACE/myplaybook.yml"
+                sh "ansible -m ping -i $WORKSPACE/jenkins-server/inventory all"
+                sh "ansible-playbook -i $WORKSPACE/jenkins-server/inventory $WORKSPACE/myplaybook.yml --syntax-check"
+                sh "ansible-playbook -i $WORKSPACE/jenkins-server/inventory $WORKSPACE/myplaybook.yml"
             }            
         }
         stage('Build & Deploy APP in Docker'){
