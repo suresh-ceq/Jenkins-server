@@ -1,9 +1,7 @@
 ---
 # tasks file for cloudeq_ansible
-- name: Copying the Directory's contents (sub directories/files)
+- name: Copy Dockerfile to Deployserver
   become: true 
   copy:
-    src: /var/lib/jenkins/workspace/
-    dest: /home/jenkins/
-       
-    
+    src: /var/lib/jenkins/workspace/cloudeq-spring/Dockerfile
+    dest: /home/jenkins/Dockerfile
