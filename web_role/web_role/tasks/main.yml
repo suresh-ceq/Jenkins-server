@@ -1,7 +1,0 @@
----
-# tasks file for cloudeq_ansible
-- name: Copy Dockerfile to Deployserver
-  become: true 
-  copy:
-    src: /var/lib/jenkins/workspace/jenkins-server/Dockerfile
-    dest: /home/jenkins/Dockerfile
