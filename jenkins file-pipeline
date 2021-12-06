@@ -1,5 +1,5 @@
 pipeline { 
-    agent{ label "MASTER" }
+    agent{ label "main" }
     triggers{ pollSCM('* * * * *') }
     stages{
         stage ('Code Download From GIT'){
