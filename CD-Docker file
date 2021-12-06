@@ -4,7 +4,6 @@ RUN cd /jenkins-server
 WORKDIR /jenkins-server
 RUN mvn clean package
 
-
 FROM openjdk:11
 RUN mkdir -p /home/cloudeq_docker
 COPY --from=builder jenkins-server/target/spring-rest-hello-world-1.0.2.jar /home/cloudeq_docker/
