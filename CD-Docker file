@@ -9,4 +9,4 @@ RUN mkdir -p /home/cloudeq_docker
 COPY --from=builder jenkins-server/target/spring-rest-hello-world-1.0.2.jar /home/cloudeq_docker/
 WORKDIR /home/cloudeq_docker
 EXPOSE 8081
-CMD ["java", "-jar", "spring-rest-hello-world-1.0.2.jar"]
+CMD ["java","-jar", "spring-rest-hello-world-1.0.2.jar"]
